@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class DFS {
+     public static boolean searchPath(int[][] maze, int r, int c, List<Integer> path){
+         if(maze[r][c] == 9){
+             path.add(r);
+             path.add(c);
+             return true;
+         }
+         
+         if(maze[r][c] == 0){
+             maze[r][c] = 2;
+             
+             int[] dr = {1,0,-1,0};
+             int[] dc = {0,1,0,-1};
+             
+             for(int d = 0; d < dr.length; d++){
+                 int nr = r + dr[d];
+                 int nc = c + dc[d];
+ 
+                 if(nr >= 0 && nr < maze.length && nc >= 0 && nc < maze[0].length && searchPath(maze, nr, nc, path)){
+                      path.add(r);
+                      path.add(c);
+                      return true;
+                 }
+             }
+         }
+         return false;
+     }
+}
